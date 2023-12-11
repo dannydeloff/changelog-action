@@ -22,25 +22,25 @@ export async function run(): Promise<void> {
 function buildOutput(notes: Note[]): string {
   const notesByType: Map<string, Note[]> = new Map()
 
-  notes.forEach(note => {
-    let nts = notesByType.get(note.type)
+  for (const note of notes) {
+    const nts = notesByType.get(note.type)
     if (nts) {
       nts.push(note)
       notesByType.set(note.type, nts)
     } else {
       notesByType.set(note.type, [])
     }
-  })
+  }
 
-  let output: string = ''
-  notesByType.forEach((nts, key) => {
-    output += `${TypeValues.get(key)}:\n`
-    nts.forEach(note => {
-      output += `* ${note.body}\n`
-    })
+  let output = ''
+  for (const [typ, nts] of notesByType) {
+    output += `${TypeValues.get(typ)}:\n`
+    for (const nt of nts) {
+      output += `* ${nt.body}\n`
+    }
 
     output += '\n'
-  })
+  }
 
   return output
 }

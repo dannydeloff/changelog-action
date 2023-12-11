@@ -6,9 +6,9 @@ const notesInBodyExps = [
 ]
 
 export function fromBody(body: string): Note[] {
-  let res: Note[] = []
+  const res: Note[] = []
 
-  for (let re of notesInBodyExps) {
+  for (const re of notesInBodyExps) {
     let m: RegExpExecArray | null
 
     while ((m = re.exec(body)) !== null) {
@@ -16,8 +16,8 @@ export function fromBody(body: string): Note[] {
         re.lastIndex++
       }
 
-      let note = m.groups?.note.trim()
-      let typ = m.groups?.type.trim()
+      const note = m.groups?.note.trim()
+      const typ = m.groups?.type.trim()
 
       if (note && typ) {
         res.push({ body: note, type: typ })
