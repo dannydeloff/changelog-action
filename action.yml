@@ -1,0 +1,13 @@
+name: 'Changelog action'
+description: 'Generates a release notes from a given string'
+author: 'dannydeloff'
+inputs:
+  body:
+    description: 'The string to generate release notes from, usually the body of a pull request'
+    required: true
+outputs:
+  notes:
+    description: 'The release notes generated, formatted as markdown'
+runs:
+  using: node20
+  main: dist/index.js
