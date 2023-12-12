@@ -8,6 +8,8 @@ export async function run(): Promise<void> {
     const body = core.getInput('body')
 
     const notes = fromBody(body)
+    core.debug(`${notes.length} note(s) found`)
+
     if (notes.length > 0) {
       const output = buildOutput(notes)
       core.setOutput('notes', output)
