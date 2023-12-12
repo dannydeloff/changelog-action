@@ -1,0 +1,10 @@
+name: 'Validate Release Notes Action'
+description: 'Validates release notes from a given string'
+author: 'dannydeloff'
+inputs:
+  body:
+    description: 'The string to generate release notes from, usually the body of a pull request'
+    required: true
+runs:
+  using: node20
+  main: dist/check-action.js

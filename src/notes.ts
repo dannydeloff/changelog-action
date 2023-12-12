@@ -1,10 +1,28 @@
-import { Note, TypeValues } from './types'
 import * as core from '@actions/core'
 
 const notesInBodyExps = [
   /```release-note:(?<type>[^\r\n]*)\r?\n?(?<note>.*?)\r?\n?```/gmu,
   /```releasenote:(?<type>[^\r\n]*)\r?\n?(?<note>.*?)\r?\n?```/gmu
 ]
+
+export const TypeValues: Map<string, string> = new Map([
+  ['note', 'NOTES'],
+  ['enhancement', 'ENHANCEMENTS'],
+  ['improvement', 'IMPROVEMENTS'],
+  ['feature', 'FEATURES'],
+  ['bug', 'BUG FIXES'],
+  ['deprecation', 'DEPRECATIONS'],
+  ['breaking-change', 'BREAKING CHANGES']
+])
+
+export type Note = {
+  type: string
+  body: string
+}
+
+export function isTypeValid(note: Note): boolean {
+  return TypeValues.has(note.type)
+}
 
 export function fromBody(body: string): Note[] {
   const res: Note[] = []
@@ -32,8 +50,4 @@ export function fromBody(body: string): Note[] {
   }
 
   return res
-}
-
-export function isTypeValid(note: Note): boolean {
-  return TypeValues.has(note.type)
 }
