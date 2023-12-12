@@ -10,4 +10,4 @@ outputs:
     description: 'The release notes generated, formatted as markdown'
 runs:
   using: node20
-  main: dist/generate-action.js
+  main: ../dist/generate-action.js
