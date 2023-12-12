@@ -30,7 +30,7 @@ function buildOutput(notes: Note[]): string {
       nts.push(note)
       notesByType.set(note.type, nts)
     } else {
-      notesByType.set(note.type, [])
+      notesByType.set(note.type, [note])
     }
   }
 
