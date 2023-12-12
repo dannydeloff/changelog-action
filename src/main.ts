@@ -42,14 +42,18 @@ function buildOutput(notes: Note[]): string {
   let output = ''
   for (const [typ, nts] of notesByType) {
     core.debug(`fetching header for type ${typ}`)
+    core.debug(`appending "${TypeValues.get(typ)}"`)
     output += `${TypeValues.get(typ)}:\n`
     for (const nt of nts) {
       core.debug(`iterating note for type ${typ}`)
+      core.debug(`appending "* ${nt.body}"`)
       output += `* ${nt.body}\n`
     }
 
     output += '\n'
   }
+
+  core.debug(`returning output: ${output}`)
 
   return output
 }
