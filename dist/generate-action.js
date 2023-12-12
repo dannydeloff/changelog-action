@@ -28,29 +28,21 @@ const core = __importStar(require("@actions/core"));
 const notes_1 = require("./notes");
 const util_1 = require("./util");
 function buildOutput(notes) {
-    core.debug(`building output for ${notes.length} note(s)`);
     const notesByType = new Map();
     for (const note of notes) {
-        core.debug(`fetching notes for type ${note.type}`);
         const nts = notesByType.get(note.type);
         if (nts) {
-            core.debug(`notes found for type ${note.type}, pushing note`);
             nts.push(note);
             notesByType.set(note.type, nts);
         }
         else {
-            core.debug(`no notes found for type ${note.type}, initializing array`);
             notesByType.set(note.type, [note]);
         }
     }
     let output = '';
     for (const [typ, nts] of notesByType) {
-        core.debug(`fetching header for type ${typ}`);
-        core.debug(`appending "${notes_1.TypeValues.get(typ)}"`);
         output += `${notes_1.TypeValues.get(typ)}:\n`;
         for (const nt of nts) {
-            core.debug(`iterating note for type ${typ}`);
-            core.debug(`appending "* ${nt.body}"`);
             output += `* ${nt.body}\n`;
         }
         output += '\n';
@@ -58,7 +50,7 @@ function buildOutput(notes) {
     core.debug(`returning output: ${output}`);
     return output;
 }
-async function run() {
+function run() {
     const body = core.getInput('body');
     const notes = (0, notes_1.fromBody)(body);
     core.debug(`${notes.length} note(s) found`);
@@ -68,9 +60,9 @@ async function run() {
     }
 }
 exports.run = run;
-async function runWrapper() {
+function runWrapper() {
     try {
-        await run();
+        run();
     }
     catch (error) {
         core.setFailed(`generate action failed. ${(0, util_1.wrapError)(error).message}`);

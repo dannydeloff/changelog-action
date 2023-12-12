@@ -30,7 +30,7 @@ function run() {
     const body = core.getInput('body');
     const notes = (0, notes_1.fromBody)(body);
     if (notes.length < 1) {
-        core.warning("no release notes found");
+        core.warning('no release notes found');
         return;
     }
     const unknownTypes = [];
