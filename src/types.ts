@@ -3,7 +3,7 @@ export const TypeValues: Map<string, string> = new Map([
   ['enhancement', 'ENHANCEMENTS'],
   ['improvement', 'IMPROVEMENTS'],
   ['feature', 'FEATURES'],
-  ['bug', 'BUGS'],
+  ['bug', 'BUG FIXES'],
   ['deprecation', 'DEPRECATIONS'],
   ['breaking-change', 'BREAKING CHANGES']
 ])
