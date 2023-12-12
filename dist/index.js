@@ -24753,21 +24753,27 @@ async function run() {
 }
 exports.run = run;
 function buildOutput(notes) {
+    core.debug(`building output for ${notes.length} note(s)`);
     const notesByType = new Map();
     for (const note of notes) {
+        core.debug(`fetching notes for type ${note.type}`);
         const nts = notesByType.get(note.type);
         if (nts) {
+            core.debug(`notes found for type ${note.type}, pushing note`);
             nts.push(note);
             notesByType.set(note.type, nts);
         }
         else {
+            core.debug(`no notes found for type ${note.type}, initializing array`);
             notesByType.set(note.type, [note]);
         }
     }
     let output = '';
     for (const [typ, nts] of notesByType) {
+        core.debug(`fetching header for type ${typ}`);
         output += `${types_1.TypeValues.get(typ)}:\n`;
         for (const nt of nts) {
+            core.debug(`iterating note for type ${typ}`);
             output += `* ${nt.body}\n`;
         }
         output += '\n';
